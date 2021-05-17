@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AnimeWeebs</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #222222;
+      
+    }
+
+    .navbar {
+      background-color: transparent;
+    }
+
+    .navbar .navbar-brand {
+      color: red;
+      font-weight: bolder;
+    }
+
+    .navbar .navbar-nav {
+      margin: 0 auto;
+      padding: 10px;
+      font-size: 20px;
+    }
+
+    .borderstyle {
+      margin-top: 5%;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px #000;
+      text-align: center;
+    }
+
+    .slider {
+      width: 100%;
+      height: 10%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class=" navagation">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height:70px;">
+      <div class="d-flex justify-content-center" style="margin-left: 20%;">
+        <a class="navbar-brand" href="/" style="margin-top: 10px;">AnimeWeebs</a>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}">
+          <input class="form-control mr-sm-2" type="search" name="s" placeholder="Search" aria-label="Search" required>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          {% if request.user.is_authenticated %}
+          <a href="{% url 'logout' %}" class="btn btn-outline-warning">Log out</a>
+          {% endif %}
+        </form>
+      </div>
+    </nav>
+  </nav>
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark" style="height:40px; background-color: #e3f2fd;">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link" href="/lib">library</a>
+
+        {% if not request.user.is_authenticated %}
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+        {% else %}
+        <a class="nav-link" href="/members">Profile-[{{request.user.username|title}}]</a>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% block content %}
+
+  {% endblock  %}
+</body>
+
+{% block footer %}
+<!-- Footer -->
+<footer class="page-footer font-small stylish-color-dark pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mx-auto">
+
+        <!-- Content -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">AnimeWeebs</h5>
+        <p style="color: yellow;"> Website where you can enjoy easily watching anime ads free without any interruptions.
+          <br>
+          <a href="">AnimeWeebs.com</a> is where you guys can simply watch out the latest anime and download it. </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mx-auto">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4"> More</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Contact us</a>
+          </li>
+          <li>
+            <a href="#!">Policy</a>
+          </li>
+          <li>
+            <a href="#!">FAQ</a>
+          </li>
+          <li>
+            <a href="#!">Help</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+      <hr class="clearfix w-100 d-md-none">
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <hr>
+
+  <!-- Call to action -->
+  <ul class="list-unstyled list-inline text-center py-2">
+    <li class="list-inline-item">
+      <h5 class="mb-1">Register for free</h5>
+    </li>
+    <li class="list-inline-item">
+      <a href="{% url 'register' %}" class="btn btn-danger btn-rounded">Sign up!</a>
+    </li>
+  </ul>
+  <!-- Call to action -->
+
+  <hr>
+
+  <!-- Social buttons -->
+  <ul class="list-unstyled list-inline text-center">
+    <li class="list-inline-item">
+      <a class="btn-floating btn-fb mx-1">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"> </i>
+        </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-tw mx-1">
+        <a href="https://twitter.com/kpsharmaoli"><i class="fab fa-twitter"> </i>
+        </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-gplus mx-1">
+        <a href="https://www.google.com/"><i class="fab fa-google-plus-g"> </i>
+        </a>
+    </li>
+  </ul>
+  <!-- Social buttons -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> AnimeWeebs.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<!-- Footer -->
+{% endblock footer %}
+
+</html>

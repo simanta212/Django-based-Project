@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <form method="POST" enctype="multipart/form-data" class="p-5">
+    <h4 style="color:white;">Upload Anime</h4>
+    {% csrf_token %}
+    <div class="row mb-3">
+      <div class="col">
+        <input type="text" class="form-control" name="title" placeholder="Title" required>
+      </div>
+      <div class="col"> 
+        <select id="category"name="cat">
+          <option value="C">comedy</option>
+          <option value="A">adventure</option>
+          <option value="D">horror</option>
+          <option value="R">romance</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <input type="file" class="form-control" name="vid" placeholder="Video" required>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <textarea name="des" class="form-control" placeholder="Description" required style="height:100px;"></textarea>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <input type="reset" class="form-control" value="Cancle">
+      </div>
+      <div class="col">
+        <input type="submit" class="form-control" value="Upload">
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+  <div class="row">
+    {% for anime in animes %}
+    <div class="col-3 py-3">
+      <div class="card" style="width: 16rem;">
+        <div class="card-body">
+          <a href="{{anime.Anime_file.url}}" target="_blank">
+            <img src='/static/play.jpg/' alt="Video" style="height: 200px; width: 200px; border: 1px solid;">
+          </a>
+          <h5 class="card-title">Title: {{anime.Anime_title}}</h5> 
+          <p class="card-text">Description: {{anime.Anime_description}}</p>
+          <p class="card-text">Uploaded by: {{request.user.username}}</p>
+          <a href="{{anime.Anime_file.url}}" class="btn btn-primary" Download>Download</a>
+          <form action="{% url 'delete_anime' anime.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Delete</button>
+          </form>
+          <a href="{% url 'edit_anime' anime.pk %}" class="btn btn-primary">Edit</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

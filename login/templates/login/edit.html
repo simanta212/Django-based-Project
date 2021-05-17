@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title> Edit anime. </title>
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <br>
+    <form method="POST" class="row">
+        {% csrf_token %}
+        <label class="col-lg-4"></label>
+        <input type="text" class="form-control col-lg-6" name="animetitle" placeholder="Anime Title"
+            value="{{anime_obj.Anime_title}}">
+        <button type="update" class="btn btn-primary col-lg-2">update</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}
