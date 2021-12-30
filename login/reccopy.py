@@ -2,7 +2,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-animes = pd.read_csv('C:/Users/Sim/Desktop/animeweeb/anime.csv', sep=',', encoding='latin-1', usecols=['title', 'genres'])
+animes = pd.read_csv('D:/Django/Django-based-Project_latest/anime.csv', sep=',', encoding='latin-1', usecols=['title', 'genres'])
+
 
 #spliting into array list or string list
 animes['genres'] = animes['genres'].str.split('|') 
